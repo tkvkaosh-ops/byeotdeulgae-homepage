@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a7472e">
+  <meta name="description" content="우리 아이의 속도에 맞춘 동네 반려견 돌봄, 볕들개. 가상의 가게로 만든 실습용 페이지입니다.">
+  <title>볕들개 — 혼자 있는 하루에도, 다정한 볕 한 줌</title>
+  <!--
+  벤치마크: https://www.glossier.com/en-kr
+  사용자가 관찰 항목 선택을 위임하여 선정한 세 가지 효과:
+  1. 넓은 히어로 + 간결한 안내 패널 → 첫눈에 분위기와 행동 전달
+  2. 큰 사진 면과 넓은 여백의 반복 → 차분한 탐색 리듬
+  3. 카드마다 같은 위치의 행동 버튼 → 선택 후 바로 예약 폼으로 이동
+  구조 분석 7줄:
+  1. 공지/메뉴 → 히어로 → 상품 카드 → 2열 이미지 → 이야기/분류 → 하단 안내.
+  2. 전폭 이미지의 왼쪽 흰 패널에 짧은 제목, 설명, 주 행동을 배치.
+  3. 큰 브랜드명 → 섹션 제목 → 상품명 → 설명의 글자 위계.
+  4. 넓은 이미지 면과 간결한 글 영역이 교대로 등장하는 여백의 리듬.
+  5. 히어로 주 버튼 하나, 각 상품 카드 아래 행동 하나가 반복.
+  6. 사진 면적이 크고 글은 짧게 모여 이미지에서 행동으로 연결.
+  7. 흰색/검정/중성색 바탕. 이 페이지는 독자적인 테라코타/크림색 사용.
+  주문서의 섹션 순서를 우선하며 고유 로고, 문구, 사진, 색상은 복제하지 않음.
+  -->
+  <style>
+    /* 바꾸기 쉬운 곳 1: 이 색상 값들을 바꾸면 전체 색이 함께 바뀝니다. */
+    :root{--accent:#a7472e;--accent-dark:#84351f;--cream:#faf7f1;--paper:#fffdf9;--ink:#302b27;--muted:#6d655e;--line:#d9d2c9;--photo:#deddd9;--soft:#efe6db;--gutter:clamp(20px,4vw,64px)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;background:var(--cream);color:var(--ink);font-family:Pretendard,"Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:5px}h1,h2,h3,p,figure,blockquote{margin:0}h1,h2,h3{line-height:1.3;font-weight:600;letter-spacing:-.05em}p{letter-spacing:-.025em}::selection{background:#e8b39b;color:var(--ink)}.skip{position:fixed;top:-100px;left:16px;z-index:20;background:white;padding:12px}.skip:focus{top:12px}.wrap{max-width:1440px;margin:auto;padding-inline:var(--gutter)}.eyebrow{font-size:12px;letter-spacing:.12em;font-weight:600}.muted{color:var(--muted)}.tiny{font-size:12px;line-height:1.7}.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:30px;min-height:48px;padding:12px 22px;border:1px solid var(--accent);background:var(--accent);color:white;font-size:14px;font-weight:600;cursor:pointer;border-radius:0;transition:background .18s,transform .18s}.btn:hover{background:var(--accent-dark);border-color:var(--accent-dark);transform:translateY(-2px)}.btn::after{content:"↗";font-size:20px;line-height:1}.btn.outline{color:var(--accent);background:transparent}.btn.outline:hover{background:var(--accent);color:white}.announcement{text-align:center;background:var(--accent);color:#fff8ef;padding:8px 18px;font-size:12px;letter-spacing:.04em}.header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:var(--paper)}.nav{min-height:76px;display:flex;align-items:center;gap:32px}.brand{font-size:31px;letter-spacing:-.08em;line-height:1.2;font-weight:800;color:var(--accent)}.brand span{color:var(--ink)}.brand-note{font-size:11px;color:var(--muted);border-left:1px solid var(--line);padding-left:20px;line-height:1.5}.navlinks{display:flex;gap:28px;margin-left:auto;font-size:13px}.navlinks a{display:flex;align-items:center;min-height:44px}.navlinks a:hover{color:var(--accent)}.nav .btn{margin-left:auto;min-width:130px}.hero{position:relative;min-height:660px;background:var(--photo);display:flex;flex-direction:column;justify-content:space-between;padding:48px var(--gutter) 24px;isolation:isolate}.photo{display:grid;place-items:center;background:var(--photo);color:#655f58;text-align:center;padding:26px;min-width:0}.photo-label{font-size:13px;line-height:1.8;font-weight:400;letter-spacing:0}.hero-photo{position:absolute;inset:0;z-index:-1;align-items:start;justify-items:end;padding:48px var(--gutter)}.hero-photo .photo-label{max-width:240px;text-align:right}.hero-panel{width:min(450px,100%);padding:35px;background:var(--paper)}.hero-panel .eyebrow{color:var(--accent);margin-bottom:19px}.hero h1{font-size:clamp(30px,3.5vw,48px);margin-bottom:20px}.hero-panel p{font-size:14px;color:var(--muted);max-width:330px}.hero-panel .btn{margin-top:26px;min-width:155px}.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-top:35px;color:var(--accent)}.hero-word{font-weight:800;font-size:clamp(90px,15vw,220px);line-height:.95;letter-spacing:-.085em}.hero-bottom .tiny{text-align:right;max-width:150px;padding-bottom:5px}.section{padding-block:100px}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:40px}.section-head h2{font-size:clamp(30px,3.5vw,44px);margin-top:12px}.section-head .intro{max-width:350px;font-size:14px;color:var(--muted)}.section-head .eyebrow{color:var(--accent)}.care-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(35px,7vw,110px);align-items:center}.care-photo{min-height:510px}.care-copy h2{font-size:clamp(30px,3.5vw,44px);margin:16px 0 25px}.care-copy>p{color:var(--muted);font-size:15px;max-width:430px}.care-list{list-style:none;margin:30px 0 0;padding:0}.care-list li{display:grid;grid-template-columns:30px 1fr;gap:15px;border-top:1px solid var(--line);padding:19px 0}.care-list .num{color:var(--accent);font-size:12px;padding-top:3px}.care-list strong{display:block;font-size:16px;font-weight:600;margin-bottom:4px}.care-list p{font-size:13px;color:var(--muted)}.care-copy .btn{margin-top:20px}.services{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper)}.service-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}.service{display:flex;flex-direction:column;min-width:0}.service .photo{aspect-ratio:4/5;position:relative}.tag{position:absolute;top:14px;left:14px;padding:3px 9px;background:var(--paper);color:var(--ink);font-size:11px}.service-meta{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-top:20px}.service h3{font-size:20px}.service-meta>span{color:var(--muted);font-size:12px;white-space:nowrap}.service>p{font-size:13px;color:var(--muted);margin:12px 0 22px;flex:1}.price{display:block;font-size:14px;margin-bottom:17px}.price small{font-size:11px;color:var(--muted);font-weight:400}.service .btn{width:100%}.service-note{margin-top:26px;color:var(--muted)}.reviews .section-head{margin-bottom:40px}.review-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.review{padding:32px 32px 32px 0;display:flex;flex-direction:column}.review+.review{border-left:1px solid var(--line);padding-left:32px}.stars{color:var(--accent);letter-spacing:4px;font-size:13px}.review blockquote{font-size:20px;line-height:1.65;letter-spacing:-.035em;margin:18px 0 28px;flex:1}.review cite{font-size:12px;font-style:normal;color:var(--muted)}.review cite strong{color:var(--ink);font-weight:500}.review-note{margin-top:16px;color:var(--muted)}.reservation{background:var(--soft);border-block:1px solid var(--line)}.booking-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(40px,8vw,120px)}.booking-copy h2{font-size:clamp(32px,4vw,50px);margin:16px 0 25px}.booking-copy>p{font-size:14px;color:var(--muted);max-width:340px}.booking-copy .eyebrow{color:var(--accent)}.booking-note{margin-top:38px;padding-top:22px;border-top:1px solid #c9bdae;max-width:340px}.booking-note p{font-size:12px;color:var(--muted);margin-top:7px}.booking-note strong{font-weight:600;font-size:14px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 18px}.field{display:flex;flex-direction:column;gap:7px;min-width:0}.field.full{grid-column:1/-1}.field label{font-size:13px;font-weight:500}.required{font-size:11px;color:var(--muted);font-weight:400;margin-left:5px}input,select,textarea{width:100%;min-width:0;min-height:50px;border:1px solid #bcb2a6;background:var(--paper);color:var(--ink);border-radius:0;padding:12px 13px;font-size:14px}input::placeholder,textarea::placeholder{color:#80776d}input[type=date]{appearance:none;min-height:50px}textarea{resize:vertical;min-height:100px}form>.tiny{margin:17px 0;color:var(--muted)}form>.btn{width:100%}.result{margin-top:20px;padding:20px;background:var(--paper);border-left:3px solid var(--accent);font-size:14px}.result p{margin-top:8px}.result[hidden]{display:none}.visit-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:64px;align-items:stretch}.map-placeholder{min-height:360px;position:relative;border:1px solid #c9c8c3;background:#e1e0dc;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:25px;color:#655f58}.map-label{font-size:19px;letter-spacing:-.03em}.map-placeholder .tiny{margin-top:12px;max-width:280px}.visit-details{display:flex;flex-direction:column;justify-content:center}.visit-details h3{font-size:25px;margin-bottom:18px}.info-row{display:grid;grid-template-columns:70px 1fr;gap:16px;padding:15px 0;border-top:1px solid var(--line);font-size:14px}.info-row dt{color:var(--muted)}.info-row dd{margin:0}.visit-details .btn{margin-top:20px;align-self:flex-start;min-width:155px}.visit-note{margin-top:18px;color:var(--muted)}footer{background:var(--accent);color:var(--paper);padding-block:45px}.footer-row{display:flex;justify-content:space-between;align-items:flex-end;gap:28px}footer .brand{color:var(--paper);font-size:40px}footer p{font-size:13px;margin-top:10px}footer .tiny{max-width:350px;text-align:right;color:#f2dcd1}.mobile-cta{display:none}noscript p{background:#fff3d8;padding:16px;text-align:center;font-size:14px}
+    @media(min-width:1500px){.hero{min-height:720px}}
+    @media(max-width:1000px){.brand-note{display:none}.navlinks{gap:20px}.service-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:38px 22px}.care-grid{gap:40px}.review blockquote{font-size:18px}.visit-grid{gap:35px}.hero-photo .photo-label{max-width:180px}.booking-grid{gap:40px}}
+    @media(max-width:640px){html{scroll-padding-top:85px}.announcement{font-size:10px;padding-block:7px}.nav{min-height:68px;gap:15px}.brand{font-size:28px}.navlinks{display:none}.nav .btn{min-width:120px;font-size:12px;padding:10px 15px;min-height:44px}.hero{min-height:720px;padding:24px 20px 25px}.hero-photo{align-items:start;justify-items:center;padding:365px 25px 0}.hero-photo .photo-label{text-align:center;max-width:250px}.hero-panel{padding:26px;width:100%}.hero-panel .eyebrow{font-size:11px;margin-bottom:14px}.hero h1{font-size:34px}.hero-panel p{font-size:13px}.hero-panel .btn{margin-top:22px}.hero-bottom{display:block;margin-top:130px}.hero-word{font-size:clamp(86px,25vw,145px)}.hero-bottom .tiny{text-align:left;max-width:none;font-size:11px;margin-top:18px}.section{padding-block:66px}.section-head{display:block;margin-bottom:28px}.section-head .intro{margin-top:18px;max-width:100%;font-size:13px}.section-head h2,.care-copy h2{font-size:31px}.care-grid{grid-template-columns:1fr;gap:34px}.care-photo{min-height:330px;aspect-ratio:1.06}.care-copy>p{font-size:14px}.care-list{margin-top:25px}.service-grid{grid-template-columns:1fr;gap:36px}.service .photo{aspect-ratio:5/4}.service-meta{margin-top:16px}.service h3{font-size:22px}.service>p{margin-bottom:16px}.service .btn{min-height:50px}.service-note{font-size:11px}.review-grid{grid-template-columns:1fr}.review,.review+.review{border-left:none;padding:25px 0}.review+.review{border-top:1px solid var(--line)}.review blockquote{font-size:19px;margin:15px 0 20px}.booking-grid{grid-template-columns:1fr;gap:35px}.booking-copy h2{font-size:36px}.booking-note{margin-top:25px;max-width:100%}.form-grid{gap:17px;grid-template-columns:1fr}.field{grid-column:1/-1}.visit-grid{grid-template-columns:1fr;gap:28px}.map-placeholder{min-height:280px}.info-row{grid-template-columns:64px 1fr;font-size:13px}.footer-row{display:block}footer .tiny{text-align:left;margin-top:25px}footer{padding-bottom:115px}.mobile-cta{display:block;position:fixed;bottom:0;left:0;right:0;z-index:12;padding:10px 20px calc(10px + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}.mobile-cta .btn{display:flex;width:100%;min-height:48px}.mobile-cta .btn span{font-weight:400;font-size:12px}.btn:hover{transform:none}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 바로가기</a>
+  <div class="announcement">동네에서 만나는 다정한 반려견 돌봄 · 실습용 가상 가게</div>
+  <header class="header">
+    <div class="wrap nav">
+      <!-- 바꾸기 쉬운 곳 2: 상호와 한 줄 약속, 각 섹션의 문구를 여기서 수정하세요. -->
+      <a class="brand" href="#main" aria-label="볕들개 첫 화면">볕들개<span>.</span></a>
+      <span class="brand-note">아이의 속도로,<br>다정한 하루를.</span>
+      <nav class="navlinks" aria-label="주요 메뉴"><a href="#care">우리의 돌봄</a><a href="#services">이용 안내</a><a href="#visit">오시는 길</a></nav>
+      <a class="btn" href="#reservation">예약하기</a>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="photo hero-photo" role="img" aria-label="사진 자리: 햇살 드는 공간에서 편안하게 쉬는 반려견"><span class="photo-label">[사진: 햇살 드는 공간에서<br>편안하게 쉬는 반려견]</span></div>
+      <div class="hero-panel">
+        <div class="eyebrow">우리 동네 반려견 돌봄집</div>
+        <h1 id="hero-title">혼자 있는 하루에도,<br>다정한 볕 한 줌.</h1>
+        <p>낯선 곳에서도 마음 놓을 수 있도록.<br>산책부터 쉼까지, 우리 아이의 속도로 함께해요.</p>
+        <a class="btn" href="#reservation">예약하기</a>
+      </div>
+      <div class="hero-bottom"><div class="hero-word" aria-hidden="true">볕들개.</div><p class="tiny">잘 놀고, 푹 쉬고,<br>반갑게 다시 만나는 곳.</p></div>
+    </section>
+
+    <section id="care" class="section wrap" aria-labelledby="care-title">
+      <div class="care-grid">
+        <div class="photo care-photo" role="img" aria-label="사진 자리: 반려견과 눈높이를 맞춰 인사하는 돌봄 선생님"><span class="photo-label">[사진: 반려견과 눈높이를 맞춰<br>인사하는 돌봄 선생님]</span></div>
+        <div class="care-copy">
+          <div class="eyebrow muted">마음 쓰이는 순간을 함께</div>
+          <h2 id="care-title">맡기는 마음까지<br>편안했으면 해서.</h2>
+          <p>바쁜 날의 미안함도, 처음 맡기는 걱정도 알아요. 익숙한 습관을 먼저 듣고, 작은 변화도 함께 나누는 돌봄을 준비했어요.</p>
+          <ul class="care-list">
+            <li><span class="num">01</span><div><strong>혼자 기다리는 시간이 길 때</strong><p>놀이와 쉼을 번갈아, 심심하지 않은 하루를 보내요.</p></div></li>
+            <li><span class="num">02</span><div><strong>낯선 공간이 어려운 아이에게</strong><p>서두르지 않는 첫 만남으로 천천히 친해져요.</p></div></li>
+            <li><span class="num">03</span><div><strong>어떻게 지내는지 궁금할 때</strong><p>식사와 산책, 오늘의 기분을 돌봄 기록으로 전해요.</p></div></li>
+          </ul>
+          <a class="btn outline" href="#reservation">예약하기</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">아이에게 맞는 하루</div><h2 id="services-title">필요한 만큼, 다정하게.</h2></div><p class="intro">잠깐의 외출부터 긴 하루까지.<br>우리 아이에게 맞는 시간을 골라 주세요.</p></div>
+        <!-- 바꾸기 쉬운 곳 3: 서비스 이름/설명/가격. 이름을 바꾸면 아래 폼의 선택지도 함께 바꾸세요. -->
+        <div class="service-grid">
+          <article class="service"><div class="photo" role="img" aria-label="사진 자리: 보호자와 함께 공간을 둘러보는 반려견"><span class="tag">첫 방문 추천</span><span class="photo-label">[사진: 보호자와 함께<br>공간을 둘러보는 반려견]</span></div><div class="service-meta"><h3>첫 만남 산책</h3><span>30분</span></div><p>보호자와 함께 인사하고, 동네를 걸으며 아이의 성향을 알아봐요.</p><strong class="price">15,000원 <small>가상 가격</small></strong><a class="btn outline" href="#reservation" data-service="첫 만남 산책" aria-label="첫 만남 산책 예약하기">예약하기</a></article>
+          <article class="service"><div class="photo" role="img" aria-label="사진 자리: 장난감으로 차분히 놀이하는 반려견"><span class="photo-label">[사진: 장난감으로<br>차분히 놀이하는 반려견]</span></div><div class="service-meta"><h3>잠깐 돌봄</h3><span>2시간</span></div><p>볼일 보는 동안, 놀이와 낮잠이 있는 포근한 시간을 선물해요.</p><strong class="price">25,000원 <small>가상 가격</small></strong><a class="btn outline" href="#reservation" data-service="잠깐 돌봄" aria-label="잠깐 돌봄 예약하기">예약하기</a></article>
+          <article class="service"><div class="photo" role="img" aria-label="사진 자리: 산책 후 방석에서 쉬는 반려견"><span class="tag">일상의 든든한 친구</span><span class="photo-label">[사진: 산책 후<br>방석에서 쉬는 반려견]</span></div><div class="service-meta"><h3>하루 돌봄</h3><span>8시간</span></div><p>산책, 식사, 휴식까지 평소의 생활 리듬을 이어 가도록 함께해요.</p><strong class="price">55,000원 <small>가상 가격</small></strong><a class="btn outline" href="#reservation" data-service="하루 돌봄" aria-label="하루 돌봄 예약하기">예약하기</a></article>
+          <article class="service"><div class="photo" role="img" aria-label="사진 자리: 나란히 걸으며 교감하는 돌봄 선생님과 반려견"><span class="photo-label">[사진: 나란히 걸으며 교감하는<br>돌봄 선생님과 반려견]</span></div><div class="service-meta"><h3>우리 동네 산책</h3><span>50분</span></div><p>익숙한 길에서도 새로운 냄새를 충분히. 아이의 걸음에 맞춰 걸어요.</p><strong class="price">28,000원 <small>가상 가격</small></strong><a class="btn outline" href="#reservation" data-service="우리 동네 산책" aria-label="우리 동네 산책 예약하기">예약하기</a></article>
+        </div>
+        <p class="tiny service-note">※ 서비스 내용·이용 시간·가격은 모두 실습용 가상 예시입니다. 실제 운영 시 돌봄 조건과 이용 기준을 안내해 주세요.</p>
+      </div>
+    </section>
+
+    <section id="reviews" class="section reviews wrap" aria-labelledby="reviews-title">
+      <div class="section-head"><div><div class="eyebrow">함께한 마음들</div><h2 id="reviews-title">다녀온 하루가 남긴 이야기.</h2></div><p class="intro">아이도, 보호자도 조금 더 편안해지는 순간.<br>이런 하루를 만들어 가고 싶어요.</p></div>
+      <div class="review-grid">
+        <figure class="review"><div class="stars" aria-label="가상 별점 5점">★★★★★</div><blockquote>“처음엔 문 앞에서 망설이더니, 이제는 먼저 꼬리를 흔들어요.”</blockquote><figcaption><cite><strong>두부 보호자</strong> · 첫 만남 산책 이용 · 가상 후기</cite></figcaption></figure>
+        <figure class="review"><div class="stars" aria-label="가상 별점 5점">★★★★★</div><blockquote>“낮잠은 잘 잤는지, 밥은 먹었는지. 작은 기록 하나가 참 든든했어요.”</blockquote><figcaption><cite><strong>보리 보호자</strong> · 하루 돌봄 이용 · 가상 후기</cite></figcaption></figure>
+        <figure class="review"><div class="stars" aria-label="가상 별점 5점">★★★★★</div><blockquote>“천천히 걷는 우리 아이에게 걸음을 맞춰 주셔서 마음이 놓였어요.”</blockquote><figcaption><cite><strong>콩이 보호자</strong> · 우리 동네 산책 이용 · 가상 후기</cite></figcaption></figure>
+      </div>
+      <p class="tiny review-note">※ 후기·이름·별점은 페이지 구성을 보여 주기 위해 만든 가상 예시이며, 실제 고객 평가가 아닙니다.</p>
+    </section>
+
+    <section id="reservation" class="section reservation" aria-labelledby="booking-title">
+      <div class="wrap booking-grid">
+        <div class="booking-copy"><div class="eyebrow">반가운 첫 인사를 기다려요</div><h2 id="booking-title">우리 아이 이야기를<br>들려주세요.</h2><p>어떤 걸 좋아하는지, 무엇이 낯선지.<br>아이를 알아가는 일부터 차근차근 시작할게요.</p><div class="booking-note"><strong>예약·문의 양식 미리보기</strong><p>실습용 폼입니다. 작성 내용은 저장되거나 외부로 전송되지 않으며, 실제 예약은 접수되지 않습니다.</p></div></div>
+        <form id="booking-form">
+          <div class="form-grid">
+            <div class="field"><label for="guardian">보호자 이름<span class="required">필수</span></label><input id="guardian" name="guardian" required maxlength="30" autocomplete="name" placeholder="이름을 적어 주세요"></div>
+            <div class="field"><label for="phone">연락처<span class="required">필수</span></label><input id="phone" name="phone" type="tel" required maxlength="20" autocomplete="tel" inputmode="tel" placeholder="010-0000-0000" aria-describedby="form-note"></div>
+            <div class="field"><label for="pet">반려견 이름<span class="required">필수</span></label><input id="pet" name="pet" required maxlength="30" placeholder="아이 이름을 적어 주세요"></div>
+            <div class="field"><label for="service">원하는 서비스<span class="required">필수</span></label><select id="service" name="service" required><option value="">서비스를 골라 주세요</option>첫 만남 산책</option><option>잠깐 돌봄</option><option>하루 돌봄</option><option>우리 동네 산책</option><option>먼저 상담하고 싶어요</option></select></div>
+            <div class="field full"><label for="date">희망 방문일<span class="required">필수</span></label><input id="date" name="date" type="date" required aria-describedby="date-note"><span id="date-note" class="tiny muted">일요일은 쉬어요. 희망일은 예약 확정일이 아닙니다.</span></div>
+            <div class="field full"><label for="message">미리 알려 주실 이야기<span class="required">선택</span></label><textarea id="message" name="message" maxlength="1000" placeholder="나이, 평소 습관, 낯가림 등 함께 알면 좋을 이야기를 적어 주세요."></textarea></div>
+          </div>
+          <p id="form-note" class="tiny">연락처는 화면 동작 확인에만 사용합니다. 실제 개인정보 대신 예시로 작성해 주세요.</p>
+          <button class="btn" type="submit">예약하기</button>
+          <div id="form-result" class="result" role="status" aria-live="polite" hidden><strong>예약 양식 확인이 끝났어요.</strong><p id="form-summary"></p><p class="tiny muted">실습용 동작입니다. 내용은 저장·전송되지 않았으며, 실제 예약은 접수되지 않았습니다.</p></div>
+          <noscript><p>예약 폼의 미리보기를 사용하려면 브라우저의 자바스크립트를 켜 주세요. 실제 예약은 접수되지 않습니다.</p></noscript>
+        </form>
+      </div>
+    </section>
+
+    <section id="visit" class="section wrap" aria-labelledby="visit-title">
+      <div class="section-head"><div><div class="eyebrow">가까운 곳에서 만나요</div><h2 id="visit-title">산책길 끝, 볕들개.</h2></div><p class="intro">아이와 함께 천천히 들러 주세요.<br>첫 방문은 예약 후 만나요.</p></div>
+      <div class="visit-grid">
+        <div class="map-placeholder" role="img" aria-label="실제 위치가 아닌 지도 자리"><span class="map-label">[지도: 실제 매장 위치를 넣어 주세요]</span><p class="tiny">가상 가게이므로 실제 지도는 연결하지 않았어요.<br>아래 주소도 실습용 예시입니다.</p></div>
+        <div class="visit-details"><h3>볕들개 돌봄집</h3><dl><div class="info-row"><dt>주소</dt><dd>서울시 볕마을구 다정로 12, 1층<br><span class="tiny muted">실재하지 않는 가상 주소</span></dd></div><div class="info-row"><dt>영업시간</dt><dd>월–토 09:00–19:00<br>일요일·공휴일 휴무 <span class="tiny muted">(가상 운영시간)</span></dd></div><div class="info-row"><dt>방문 안내</dt><dd>아이와 편하게 만날 수 있도록<br>첫 방문은 미리 예약해 주세요.</dd></div></dl><a class="btn outline" href="#reservation">예약하기</a></div>
+      </div>
+      <p class="tiny visit-note">※ 이 페이지의 가게·서비스·수치·후기·주소·운영 정보는 모두 실습을 위한 가상 설정입니다.</p>
+    </section>
+  </main>
+  <footer><div class="wrap footer-row"><div><div class="brand">볕들개.</div><p>아이의 하루에, 다정한 볕이 들도록.</p></div><p class="tiny">가상의 반려견 돌봄 가게 · 랜딩페이지 실습용<br>사진은 모두 교체를 위한 자리 표시입니다.</p></div></footer>
+  <div class="mobile-cta"><a class="btn" href="#reservation">예약하기 <span>아이의 첫 인사를 함께해요</span></a></div>
+  <script>
+    // 파일을 직접 열어도 작동합니다. 외부 전송·서버·개인정보 저장 기능은 없습니다.
+    const form = document.getElementById('booking-form');
+    const service = document.getElementById('service');
+    const date = document.getElementById('date');
+    const phone = document.getElementById('phone');
+    const result = document.getElementById('form-result');
+    const today = new Date();
+    const localToday = [today.getFullYear(), String(today.getMonth()+1).padStart(2,'0'), String(today.getDate()).padStart(2,'0')].join('-');
+    date.min = localToday;
+    function validateDate(){
+      date.setCustomValidity('');
+      if(date.value && date.value < localToday) date.setCustomValidity('오늘 이후의 날짜를 골라 주세요.');
+      else if(date.value && new Date(date.value+'T12:00:00').getDay() === 0) date.setCustomValidity('일요일은 쉬는 날이에요. 다른 날짜를 골라 주세요.');
+    }
+    function validatePhone(){
+      const digits = phone.value.replace(/\D/g,'');
+      phone.setCustomValidity(phone.value && (!/^[0-9+()\s-]+$/.test(phone.value) || digits.length < 9 || digits.length > 13) ? '연락처를 숫자 9~13자리로 적어 주세요.' : '');
+    }
+    document.querySelectorAll('[data-service]').forEach(link => {
+      link.addEventListener('click', () => {
+        service.value = link.dataset.service;
+        result.hidden = true;
+      });
+    });
+    phone.addEventListener('input', validatePhone);
+    date.addEventListener('input', validateDate);
+    form.addEventListener('input', () => { result.hidden = true; });
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      validatePhone(); validateDate();
+      ['guardian','pet'].forEach(id => {
+        const input = document.getElementById(id);
+        input.setCustomValidity(input.value.trim() ? '' : '이름을 적어 주세요.');
+      });
+      if(!form.reportValidity()) return;
+      document.getElementById('form-summary').textContent = service.value + ' · ' + date.value.replaceAll('-', '.') + ' 희망 일정으로 작성하셨어요.';
+      result.hidden = false;
+      result.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'center'});
+    });
+    ['guardian','pet'].forEach(id => document.getElementById(id).addEventListener('input', event => event.target.setCustomValidity('')));
+  </script>
+</body>
+</html>
